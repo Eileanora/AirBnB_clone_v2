@@ -14,6 +14,10 @@ class State(BaseModel, Base):
     else:
         name = ""
 
+    def __init__(self, *args, **kwargs):
+        '''Initializes State'''
+        super().__init__(*args, **kwargs)
+
     if not db_mode:
         @property
         def cities(self):

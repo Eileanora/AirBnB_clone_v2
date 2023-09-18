@@ -11,7 +11,7 @@ class DBStorage:
 
     def __init__(self):
         '''Initialize a DBStorage instance'''
-        self.engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.format(
+        self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.format(
             getenv('HBNB_MYSQL_USER'),
             getenv('HBNB_MYSQL_PWD'),
             getenv('HBNB_MYSQL_HOST'),
@@ -51,6 +51,8 @@ class DBStorage:
          create the current database session
         '''
         from models.base_model import Base
+        from models.state import State
+        from models.city import City
         Session = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Base.metadata.create_all(self.__engine)
         self.__session = scoped_session(Session)
