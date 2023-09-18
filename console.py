@@ -123,7 +123,6 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
         new_instance = HBNBCommand.classes[args_list[0]]()
-        new_instance.save()
         print(new_instance.id)
         if args_list[1:]:
             for arg in args_list[1:]:
@@ -131,6 +130,7 @@ class HBNBCommand(cmd.Cmd):
                 value = arg.split('=')[1].replace('"', '')
                 value = value.replace('_', ' ')
                 setattr(new_instance, key, value)
+        new_instance.save()
         storage.save()
 
     def help_create(self):
