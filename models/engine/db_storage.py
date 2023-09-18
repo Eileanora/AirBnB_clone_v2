@@ -3,7 +3,6 @@
 from os import getenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
-from models.base_model import Base
 
 
 class DBStorage:
@@ -18,7 +17,8 @@ class DBStorage:
             getenv('HBNB_MYSQL_HOST'),
             getenv('HBNB_MYSQL_DB')),
             pool_pre_ping=True)
-        if getenv('HNBN_ENV' == 'test'):
+        if getenv('HNBN_ENV') == 'test':
+            from models.base_model import Base
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
@@ -50,6 +50,7 @@ class DBStorage:
         '''Create all tables in the database and\
          create the current database session
         '''
+        from models.base_model import Base
         Session = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Base.metadata.create_all(self.__engine)
         self.__session = scoped_session(Session)
