@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ Console Module """
+import ast
 import cmd
 import sys
 from models.base_model import BaseModel
@@ -127,9 +128,10 @@ class HBNBCommand(cmd.Cmd):
         if args_list[1:]:
             for arg in args_list[1:]:
                 key = arg.split('=')[0]
-                value = arg.split('=')[1].replace('"', '')
+                value = arg.split('=')[1]
                 value = value.replace('_', ' ')
-                setattr(new_instance, key, value)
+                val = ast.literal_eval(value)
+                setattr(new_instance, key, val)
         new_instance.save()
         storage.save()
 
