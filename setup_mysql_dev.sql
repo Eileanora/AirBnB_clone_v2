@@ -1,4 +1,4 @@
--- script that sets up the data base for the project
+-- script that sets up the database for the project
 -- and sets up the user and it's privilages
 CREATE DATABASE IF NOT EXISTS hbnb_dev_db;
 CREATE USER IF NOT EXISTS 'hbnb_dev'@'localhost' IDENTIFIED BY 'hbnb_dev_pwd';
