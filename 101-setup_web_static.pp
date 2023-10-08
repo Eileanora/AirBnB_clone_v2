@@ -5,31 +5,44 @@ package { 'nginx':
 }
 
 file { '/data':
-  ensure => directory,
+  ensure  => directory,
+  owner   => 'ubuntu',
+  group   => 'ubuntu',
+  recurse => true,
 }
 
 file { '/data/web_static':
   ensure  => directory,
+  owner   => 'ubuntu',
+  group   => 'ubuntu',
   require => File['/data'],
 }
 
 file { '/data/web_static/releases':
   ensure  => directory,
+  owner   => 'ubuntu',
+  group   => 'ubuntu',
   require => File['/data/web_static'],
 }
 
 file { '/data/web_static/shared':
   ensure  => directory,
+  owner   => 'ubuntu',
+  group   => 'ubuntu',
   require => File['/data/web_static'],
 }
 
 file { '/data/web_static/releases/test':
   ensure  => directory,
+  owner   => 'ubuntu',
+  group   => 'ubuntu',
   require => File['/data/web_static/releases'],
 }
 
 file { '/data/web_static/releases/test/index.html':
   ensure  => file,
+  owner   => 'ubuntu',
+  group   => 'ubuntu',
   content => "
     <html>
       <head>
@@ -44,15 +57,11 @@ file { '/data/web_static/releases/test/index.html':
 file { '/data/web_static/current':
   ensure  => link,
   target  => '/data/web_static/releases/test',
+  owner   => 'ubuntu',
+  group   => 'ubuntu',
   require => File['/data/web_static/releases/test'],
 }
 
-file { '/data':
-  ensure  => directory,
-  owner   => 'ubuntu',
-  group   => 'ubuntu',
-  recurse => true,
-}
 
 file { '/etc/nginx/sites-available/default':
   ensure  => file,
