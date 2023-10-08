@@ -9,12 +9,14 @@ sudo apt-get -y install nginx
 sudo mkdir -p /data/web_static/releases/test/
 
 # create fake html file
-sudo echo " <html>
-    <head>
-    </head>
-    <body>
-        my test file
-    </body>
+sudo echo "\
+<html>
+  <head>
+  </head>
+  <body>
+    my test file
+  </body>
+</html>\
 " | sudo tee /data/web_static/releases/test/index.html
 
 # create symbolic link
