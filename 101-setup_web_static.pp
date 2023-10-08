@@ -47,6 +47,13 @@ file { '/data/web_static/current':
   require => File['/data/web_static/releases/test'],
 }
 
+file { '/data':
+  ensure  => directory,
+  owner   => 'ubuntu',
+  group   => 'ubuntu',
+  recurse => true,
+}
+
 file { '/etc/nginx/sites-available/default':
   ensure  => file,
   content => "
