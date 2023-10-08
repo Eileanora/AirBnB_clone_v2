@@ -18,16 +18,15 @@ def do_deploy(archive_path):
         put(archive_path, '/tmp/')
         file_name = archive_path.split('/')[-1]
         file_name_no_ext = file_name.split('.')[0]
-        folder_path = '/data/web_static/releases/'
-        run('mkdir -p {}{}/'.format(folder_path, file_name_no_ext))
-        run('tar -xzf /tmp/{} -C {}{}/'.format(file_name, folder_path,
-                                                file_name_no_ext))
-        run('rm /tmp/{}'.format(file_name))
+        folder_path = '/data/web_static/releases/' + file_name_no_ext + '/'
+        run('mkdir -p {"/'.format(folder_path))
+        run('tar -xzf /tmp/{} -C {}/'.format(file_name, folder_path))
+        run('rm /tmp/{}.tgz'.format(file_name_no_ext))
+        run('mv {}/web_static/* {}/'.format(folder_path, folder_path))
         # delete symbolic link
         run('rm -rf /data/web_static/current')
         # create new symbolic link
-        run('ln -s {}{}/ /data/web_static/current'.format(folder_path,
-                                                           file_name_no_ext))
+        run('ln -s {}/ /data/web_static/current'.format(folder_path))
         return True
-    except:
+    except Exception:
         return False
