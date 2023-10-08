@@ -11,9 +11,10 @@ env.key_path = '~/.ssh/id_rsa'
 
 
 def do_deploy(archive_path):
-    '''function to deploy the archive'''
+    '''deploy the archive'''
     if not path.exists(archive_path):
         return False
+    
     try:
         put(archive_path, '/tmp/')
         file_name = archive_path.split('/')[-1]
