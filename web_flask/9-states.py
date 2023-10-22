@@ -25,11 +25,11 @@ def states():
 def states_by_id(id):
     '''display a HTML page showing a list of states'''
     states = storage.all('State').values()
-    states = sorted(states, key=lambda state: state.name, mode='id')
     for state in states:
         if state.id == id:
-            return render_template('9-states.html', states=state, mode='none')
-    return render_template('9-states.html', states=None)
+            return render_template('9-states.html', states=state, mode='id')
+    else:
+        return render_template('9-states.html', states=None, mode='none')
 
 
 if __name__ == '__main__':
